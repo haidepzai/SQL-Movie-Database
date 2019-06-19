@@ -10,10 +10,9 @@ DROP TABLE movie_grosses;
 
 CREATE TABLE director
 (
-    dir_id       INTEGER,
     dir_name     VARCHAR(40) NOT NULL,
     dir_birthday DATE,
-    socSecNum    VARCHAR(20) NOT NULL
+    dir_socSecNum    VARCHAR(20)
 );
 CREATE TABLE role
 (
@@ -23,13 +22,13 @@ CREATE TABLE role
 CREATE TABLE quote
 (
     quote_id     INTEGER,
-    quote_phrase VARCHAR(200)
+    quote_phrase VARCHAR(200) NOT NULL
 );
 CREATE TABLE actor
 (
     actor_name     VARCHAR(40) NOT NULL,
     actor_birthday DATE,
-    socSecNum      VARCHAR(20) NOT NULL,
+    actor_socSecNum      VARCHAR(20) ,
     a_role_id      INTEGER     NOT NULL
 );
 CREATE TABLE address
@@ -52,6 +51,7 @@ CREATE TABLE prodCompany
     p_address_id INTEGER NOT NULL
 );
 CREATE TABLE movie_grosses(
+    grosses_id INTEGER,
     startDate DATE NOT NULL,
     blueRay FLOAT,
     movie_theater FLOAT
@@ -68,6 +68,15 @@ CREATE TABLE movie_database
 
 );
 
+ALTER TABLE director ADD CONSTRAINT director_pk PRIMARY KEY (dir_socSecNum);
+ALTER TABLE actor ADD CONSTRAINT actor_pk PRIMARY KEY (actor_socSecNum);
+ALTER TABLE role ADD CONSTRAINT role_pk PRIMARY KEY (role_id);
+ALTER TABLE quote ADD CONSTRAINT quote_pk PRIMARY KEY (quote_id);
+ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY (address_id);
+ALTER TABLE genre ADD CONSTRAINT genre_pk PRIMARY KEY (genre_id);
+ALTER TABLE prodCompany ADD CONSTRAINT prodCompany_pk PRIMARY KEY (comp_id);
+ALTER TABLE movie_grosses ADD CONSTRAINT  movie_gross_pk PRIMARY KEY (grosses_id);
 
+COMMIT;
 
 
