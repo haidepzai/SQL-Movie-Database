@@ -84,5 +84,10 @@ ALTER TABLE movies ADD CONSTRAINT movies_fk2 FOREIGN KEY (m_dir_id) REFERENCES  
 ALTER TABLE movies ADD CONSTRAINT movies_fk3 FOREIGN KEY (m_genre_id) REFERENCES  genre (genre_id);
 ALTER TABLE movies ADD CONSTRAINT movies_fk4 FOREIGN KEY (m_actor_id) REFERENCES  actor(actor_socSecNum);
 ALTER TABLE movies ADD CONSTRAINT movies_fk5 FOREIGN KEY (m_grosses_id) REFERENCES movie_grosses(grosses_id);
+ALTER TABLE actor ADD CONSTRAINT actor_fk1 FOREIGN KEY (a_role_id) REFERENCES role (role_id);
+
+ALTER TABLE movies ADD CONSTRAINT unique_movieID_compID UNIQUE (movie_id, m_comp_id);
+
 
 COMMIT;
+
