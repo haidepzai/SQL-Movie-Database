@@ -1,3 +1,22 @@
+ALTER TABLE actor DROP CONSTRAINT actor_fk1;
+ALTER TABLE movies DROP CONSTRAINT movies_fk5;
+ALTER TABLE movies DROP CONSTRAINT movies_fk4;
+ALTER TABLE movies DROP CONSTRAINT movies_fk3 ;
+ALTER TABLE movies DROP CONSTRAINT movies_fk2 ;
+ALTER TABLE movies DROP CONSTRAINT movies_fk1 ;
+ALTER TABLE prodCompany DROP CONSTRAINT prodCompany_fk1 ;
+
+ALTER TABLE movie_grosses DROP CONSTRAINT  movie_gross_pk ;
+ALTER TABLE prodCompany DROP CONSTRAINT prodCompany_pk ;
+ALTER TABLE genre DROP CONSTRAINT genre_pk ;
+ALTER TABLE address DROP CONSTRAINT address_pk ;
+ALTER TABLE quote DROP CONSTRAINT quote_pk ;
+ALTER TABLE role DROP CONSTRAINT role_pk;
+ALTER TABLE actor DROP CONSTRAINT actor_pk ;
+ALTER TABLE director DROP CONSTRAINT director_pk;
+
+ALTER TABLE movies DROP CONSTRAINT unique_movieID_compID;
+
 DROP TABLE movies;
 DROP TABLE prodCompany;
 DROP TABLE role;
@@ -11,63 +30,63 @@ DROP TABLE address;
 
 CREATE TABLE director
 (
-    dir_name     VARCHAR(40) NOT NULL,
-    dir_birthday DATE,
-    dir_socSecNum    VARCHAR(20)
+  dir_name     VARCHAR(40) NOT NULL,
+  dir_birthday DATE,
+  dir_socSecNum    VARCHAR(20)
 );
 CREATE TABLE role
 (
-    role_id   INTEGER,
-    role_name VARCHAR(40) NOT NULL
+  role_id   INTEGER,
+  role_name VARCHAR(40) NOT NULL
 );
 CREATE TABLE quote
 (
-    quote_id     INTEGER,
-    quote_phrase VARCHAR(200) NOT NULL
+  quote_id     INTEGER,
+  quote_phrase VARCHAR(200) NOT NULL
 );
 CREATE TABLE actor
 (
-    actor_name     VARCHAR(40) NOT NULL,
-    actor_birthday DATE,
-    actor_socSecNum      VARCHAR(20) ,
-    a_role_id      INTEGER     NOT NULL
+  actor_name     VARCHAR(40) NOT NULL,
+  actor_birthday DATE,
+  actor_socSecNum      VARCHAR(20) ,
+  a_role_id      INTEGER     NOT NULL
 );
 CREATE TABLE address
 (
-    address_id INTEGER,
-    postCode   VARCHAR(10) NOT NULL,
-    street     VARCHAR(40) NOT NULL,
-    test_location   VARCHAR(40) NOT NULL,
-    country    VARCHAR(40) NOT NULL
+  address_id INTEGER,
+  postCode   VARCHAR(10) NOT NULL,
+  street     VARCHAR(40) NOT NULL,
+  test_location   VARCHAR(40) NOT NULL,
+  country    VARCHAR(40) NOT NULL
 );
 CREATE TABLE genre
 (
-    genre_id   INTEGER,
-    genre_name VARCHAR(40)
+  genre_id   INTEGER,
+  genre_name VARCHAR(40)
 );
 CREATE TABLE prodCompany
 (
-    comp_id INTEGER,
-    comp_name   VARCHAR(40),
-    p_address_id INTEGER NOT NULL
+  comp_id INTEGER,
+  comp_name   VARCHAR(40),
+  p_address_id INTEGER NOT NULL
 );
 CREATE TABLE movie_grosses(
-    grosses_id INTEGER,
-    startDate DATE NOT NULL,
-    blueRay FLOAT,
-    movie_theater FLOAT
+                            grosses_id INTEGER,
+                            startDate DATE NOT NULL,
+                            blueRay FLOAT,
+                            movie_theater FLOAT
 );
 CREATE TABLE movies
 (
-    movie_id INTEGER,
-    title    VARCHAR(40) NOT NULL,
-    m_comp_id INTEGER NOT NULL,
-    m_dir_id VARCHAR(40) NOT NULL,
-    m_genre_id INTEGER NOT NULL,
-    m_actor_id VARCHAR(40) NOT NULL,
-    m_grosses_id INTEGER NOT NULL,
-    plot_outline VARCHAR(500),
-    release_date DATE
+  movie_id INTEGER,
+  title    VARCHAR(40) NOT NULL,
+  m_comp_id INTEGER NOT NULL,
+  m_dir_id VARCHAR(40) NOT NULL,
+  m_genre_id INTEGER NOT NULL,
+  m_actor_id VARCHAR(40) NOT NULL,
+  m_grosses_id INTEGER NOT NULL,
+  plot_outline VARCHAR(500),
+  release_date DATE
 );
 ALTER TABLE director ADD CONSTRAINT director_pk PRIMARY KEY (dir_socSecNum);
 ALTER TABLE actor ADD CONSTRAINT actor_pk PRIMARY KEY (actor_socSecNum);
