@@ -145,6 +145,10 @@ ALTER TABLE mov_gen ADD CONSTRAINT movGen_fk2 FOREIGN KEY (mg_genre_id) REFERENC
 ALTER TABLE mov_act ADD CONSTRAINT movAct_fk1 FOREIGN KEY (ma_movie_id) REFERENCES movies (movie_id);
 ALTER TABLE mov_act ADD CONSTRAINT movAct_fk2 FOREIGN KEY (ma_actor_id) REFERENCES actor (actor_socSecNum);
 
+--INSERTS
+
+--Sum of grosses grouped by movies 
+CREATE OR REPLACE VIEW weeklyGrosses AS SELECT g_movie_id, SUM(movie_theater) grossesSum FROM movie_grosses GROUP BY g_movie_id;
 
 COMMIT;
 
