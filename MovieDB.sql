@@ -7,8 +7,6 @@ ALTER TABLE mov_dir DROP CONSTRAINT movDir_fk1;
 ALTER TABLE actor DROP CONSTRAINT actor_fk2;
 ALTER TABLE actor DROP CONSTRAINT actor_fk1;
 ALTER TABLE movie_grosses DROP CONSTRAINT movies_grosses_fk1;
-ALTER TABLE movies DROP CONSTRAINT movies_fk5;
-ALTER TABLE movies DROP CONSTRAINT movies_fk4;
 ALTER TABLE movies DROP CONSTRAINT movies_fk3 ;
 ALTER TABLE movies DROP CONSTRAINT movies_fk2 ;
 ALTER TABLE movies DROP CONSTRAINT movies_fk1 ;
@@ -22,7 +20,6 @@ ALTER TABLE movie_grosses DROP CONSTRAINT  movie_gross_pk ;
 ALTER TABLE prodCompany DROP CONSTRAINT prodCompany_pk ;
 ALTER TABLE genre DROP CONSTRAINT genre_pk ;
 ALTER TABLE address DROP CONSTRAINT address_pk ;
-ALTER TABLE quote DROP CONSTRAINT quote_pk ;
 ALTER TABLE role DROP CONSTRAINT role_pk;
 ALTER TABLE actor DROP CONSTRAINT actor_pk ;
 ALTER TABLE director DROP CONSTRAINT director_pk;
@@ -34,7 +31,6 @@ DROP TABLE movie_grosses;
 DROP TABLE movies;
 DROP TABLE prodCompany;
 DROP TABLE role;
-DROP TABLE quote;
 DROP TABLE actor;
 DROP TABLE genre;
 DROP TABLE director;
@@ -51,11 +47,6 @@ CREATE TABLE role
 (
     role_id   INTEGER,
     role_name VARCHAR(40) NOT NULL
-);
-CREATE TABLE quote
-(
-    quote_id     INTEGER,
-    quote_phrase VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE address
@@ -77,11 +68,12 @@ CREATE TABLE prodCompany
     comp_name   VARCHAR(40),
     p_address_id INTEGER NOT NULL
 );
-CREATE TABLE movie_grosses(
+CREATE TABLE movie_grosses
+(
     grosses_id INTEGER,
     g_movie_id INTEGER,
     grossDate DATE NOT NULL,
-    movie_theater NUMBER(15,2),
+    movie_theater NUMBER(15,2)
 );
 CREATE TABLE movies
 (
@@ -96,11 +88,11 @@ CREATE TABLE movies
 
 CREATE TABLE actor
 (
-  actor_name     VARCHAR(40) NOT NULL,
-  actor_birthday DATE,
-  actor_socSecNum      VARCHAR(20) ,
-  a_movie_id INTEGER NOT NULL,
-  a_role_id      INTEGER     NOT NULL
+    actor_name     VARCHAR(40) NOT NULL,
+    actor_birthday DATE,
+    actor_socSecNum      VARCHAR(20) ,
+    a_movie_id INTEGER NOT NULL,
+    a_role_id      INTEGER     NOT NULL
 );
 
 CREATE TABLE mov_dir
@@ -130,12 +122,11 @@ CREATE TABLE mov_act
 ALTER TABLE director ADD CONSTRAINT director_pk PRIMARY KEY (dir_socSecNum);
 ALTER TABLE actor ADD CONSTRAINT actor_pk PRIMARY KEY (actor_socSecNum);
 ALTER TABLE role ADD CONSTRAINT role_pk PRIMARY KEY (role_id);
-ALTER TABLE quote ADD CONSTRAINT quote_pk PRIMARY KEY (quote_id);
 ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY (address_id);
 ALTER TABLE genre ADD CONSTRAINT genre_pk PRIMARY KEY (genre_id);
 ALTER TABLE prodCompany ADD CONSTRAINT prodCompany_pk PRIMARY KEY (comp_id);
 ALTER TABLE movie_grosses ADD CONSTRAINT  movie_gross_pk PRIMARY KEY (grosses_id);
-ALTER TABLE movies ADD CONSTRAINT movie_pk PRIMARY KEY (movie_id);
+ALTER TABLE movies ADD CONSTRAINT movies_pk PRIMARY KEY (movie_id);
 ALTER TABLE mov_dir ADD CONSTRAINT movDir_pk PRIMARY KEY (movDir_id);
 ALTER TABLE mov_gen ADD CONSTRAINT movGen_pk PRIMARY KEY (movGen_id);
 ALTER TABLE mov_act ADD CONSTRAINT movAct_pk PRIMARY KEY (movAct_id);
