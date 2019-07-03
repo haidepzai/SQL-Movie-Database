@@ -1,0 +1,5 @@
+Benötigen wir einen Index?
+Nein, da wir eine sehr geringe anzahal an Datensätzen in der Datenbank zu verarbeiten haben ist er einfach nicht nötig!
+Der aufwand ihn zu implementieren und die Daten zu verwalten ist zu hoch sodass es sich nicht lohnt ihn anzulegen.
+Hätten wir jedoch eine riesige Menge an Daten, zum beispiel in der "Actor" Tabelle, wäre es sinnvoll mit einem Index zu arbeiten,
+da die Suche durch den Binärbaumes mit dem der Index arbeitet, um einiges schneller ist als das normale suchen nach einem eintrag.
