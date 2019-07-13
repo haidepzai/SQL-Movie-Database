@@ -40,7 +40,7 @@ DROP TABLE genre;
 DROP TABLE movieRole;
 DROP TABLE address;
 
---CREATE all TABLES needed, in the right order in terms of their dependencies-------------------------------------------
+--CREATE all TABLES-------------------------------------------
 
 CREATE TABLE address
 (
@@ -121,8 +121,8 @@ CREATE TABLE mov_act
 );
 
 
---ADD the CONSTRAINS to the tables which are needed for their dependencies----------------------------------------------
---ADD PRIMARY KEY CONSTRAINTS
+--ADD the CONSTRAINS to the tables----------------------------------------------
+--ADD PRIMARY KEY CONSTRAINTS first
 ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY (address_id);
 ALTER TABLE movieRole ADD CONSTRAINT role_pk PRIMARY KEY (role_id);
 ALTER TABLE genre ADD CONSTRAINT genre_pk PRIMARY KEY (genre_id);
@@ -134,7 +134,7 @@ ALTER TABLE movie_grosses ADD CONSTRAINT  movie_gross_pk PRIMARY KEY (grosses_id
 ALTER TABLE mov_gen ADD CONSTRAINT mov_gen_pk PRIMARY KEY (mov_gen_id);
 ALTER TABLE mov_act ADD CONSTRAINT mov_act_pk PRIMARY KEY (mov_act_id);
 
---ADD FOREIGN KEY CONSTRAINTS
+--ADD FOREIGN KEY CONSTRAINTS after adding PRIMARY KEY CONSTRAINTS
 ALTER TABLE actor ADD CONSTRAINT actor_fk1 FOREIGN KEY (a_role_id) REFERENCES movieRole (role_id);
 ALTER TABLE prodCompany ADD CONSTRAINT prodCompany_fk1 FOREIGN KEY (p_address_id) REFERENCES address (address_id);
 ALTER TABLE movies ADD CONSTRAINT movies_fk1 FOREIGN KEY (m_comp_id) REFERENCES  prodCompany (comp_id);
@@ -146,7 +146,7 @@ ALTER TABLE mov_act ADD CONSTRAINT mov_act_fk1 FOREIGN KEY (ma_movie_id) REFEREN
 ALTER TABLE mov_act ADD CONSTRAINT mov_act_fk2 FOREIGN KEY (ma_actor_id) REFERENCES actor (actor_socSecNum);
 
 
---INSERTS for all the tables in the right order (in terms of their dependencies) ---------------------------------------
+--INSERTS for all the tables ---------------------------------------
 
 -- Address inserts
 
@@ -165,7 +165,7 @@ INSERT INTO movieRole (role_id, role_name) VALUES (4, 'Anton aus Tirol');
 
 
 -- Genre inserts
-
+--Trigger to increment ID automatically
 DROP SEQUENCE genre_incrementId;
 CREATE SEQUENCE genre_incrementId
     MINVALUE 0
@@ -248,7 +248,7 @@ BEGIN
     END IF;
 END;
 
--- Inserts into 'grosses_id' will be counted up with the trigger
+--Trigger to increment ID automatically
 DROP SEQUENCE grosses_incrementId;
 CREATE SEQUENCE grosses_incrementId
     MINVALUE 0
@@ -300,7 +300,7 @@ INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VAL
 
 --mov_gen inserts
 
---Inserts into 'mov_gen_id' will be counted up with the trigger
+--Trigger to increment ID automatically
 DROP SEQUENCE mov_gen_incrementId;
 CREATE SEQUENCE mov_gen_incrementId
     MINVALUE 0
@@ -328,7 +328,7 @@ INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 5, 4);
 
 -- mov_act inserts
 
--- Inserts into 'mov_act ' will be counted up with the trigger
+--Trigger to increment ID automatically
 DROP SEQUENCE mov_act_incrementId;
 CREATE SEQUENCE mov_act_incrementId
     MINVALUE 0
