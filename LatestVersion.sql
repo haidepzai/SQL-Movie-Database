@@ -4,7 +4,7 @@
 --
 --DROP all the constraints for a fully restartable script.--------------------------------------------------------------
 --
---DROP all FOREIGN KEYS in the right order, in terms of their dependencies.--
+--DROP all FOREIGN KEYS--
 ALTER TABLE mov_act DROP CONSTRAINT mov_act_fk2;
 ALTER TABLE mov_act DROP CONSTRAINT mov_act_fk1;
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_fk2;
@@ -15,7 +15,7 @@ ALTER TABLE movies DROP CONSTRAINT movies_fk1 ;
 ALTER TABLE prodCompany DROP CONSTRAINT prodCompany_fk1 ;
 ALTER TABLE actor DROP CONSTRAINT actor_fk1;
 
---DROP all PRIMARY KEYS in the right order.--
+--DROP all PRIMARY KEYS--
 ALTER TABLE mov_act DROP CONSTRAINT mov_act_pk;
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_pk;
 ALTER TABLE movie_grosses DROP CONSTRAINT  movie_gross_pk ;
