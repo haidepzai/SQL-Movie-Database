@@ -153,7 +153,7 @@ INSERT INTO address (address_id, postCode, street, city, country) VALUES (4,9236
 
 
 -- Genre inserts
-
+--'genre_id' will be incremented by the following trigger
 DROP SEQUENCE genre_incrementId;
 CREATE SEQUENCE genre_incrementId
     MINVALUE 0
@@ -236,7 +236,7 @@ BEGIN
     END IF;
 END;
 
--- Inserts into 'grosses_id' will be counted up with the trigger
+--'grosses_id' will be incremented by the following trigger
 DROP SEQUENCE grosses_incrementId;
 CREATE SEQUENCE grosses_incrementId
     MINVALUE 0
@@ -287,7 +287,7 @@ INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VAL
 (0, 3, TO_DATE('12.04.2015','DD.MM.YYYY'),9613664.00);
 
 -- movieRole insert
-
+--'role_id' will be incremented by the following trigger
 DROP SEQUENCE movieRole_incrementId;
 CREATE SEQUENCE movieRole_incrementId
     MINVALUE 0
@@ -314,7 +314,7 @@ INSERT INTO movieRole (role_id, role_name, mR_actor_id, mR_movie_id) VALUES (0, 
 
 --mov_gen inserts
 
---Inserts into 'mov_gen_id' will be counted up with the trigger
+--'mov_gen_id' will be incremented by the following trigger
 DROP SEQUENCE mov_gen_incrementId;
 CREATE SEQUENCE mov_gen_incrementId
     MINVALUE 0
