@@ -377,10 +377,9 @@ COMMIT;
 
 --Trigger-tests---------------------------------------------------------------------------------------------------------
 --IncrementId-TRIGGER tests--
-SELECT * FROM genre WHERE genre_id = 5;
-SELECT * FROM mov_gen WHERE mov_gen_id = 1;
-SELECT * FROM movie_grosses WHERE grosses_id = 15;
-
+SELECT * FROM movie_grosses WHERE grosses_id = 3;
+SELECT * FROM movie_grosses WHERE grosses_id = 4;
+SELECT * FROM movie_grosses WHERE grosses_id = 5;
 --Test of Trigger: "prevent_future_grosses"
 INSERT INTO movie_grosses(grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (30, 5, SYSDATE, 66754.00);
