@@ -382,7 +382,7 @@ SELECT * FROM movie_grosses WHERE grosses_id = 4;
 SELECT * FROM movie_grosses WHERE grosses_id = 5;
 --Test of Trigger: "prevent_future_grosses"
 INSERT INTO movie_grosses(grosses_id, g_movie_id, grossDate, movie_theater) VALUES
-(30, 5, SYSDATE, 66754.00);
+(0, 5, SYSDATE, 66754.00);
 
 
 
