@@ -1,6 +1,6 @@
 --- Movie-database ---
 
--- DROP CONSTRAINTS --
+-- DROP CONSTRAINTs --
 
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_fk2;
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_fk1;
@@ -25,7 +25,7 @@ ALTER TABLE genre DROP CONSTRAINT genre_pk ;
 ALTER TABLE address DROP CONSTRAINT address_pk ;
 
 
--- DROP TABLES --
+-- DROP TABLEs --
 
 DROP TABLE mov_gen;
 DROP TABLE movieRole;
@@ -38,7 +38,7 @@ DROP TABLE genre;
 DROP TABLE address;
 
 
--- CREATE TABLES --
+-- CREATE TABLEs --
 
 CREATE TABLE address
 (
@@ -112,7 +112,7 @@ CREATE TABLE mov_gen
 );
 
 
--- ADD CONSTRAINTS --
+-- ADD CONSTRAINTs --
 
 ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY (address_id);
 ALTER TABLE genre ADD CONSTRAINT genre_pk PRIMARY KEY (genre_id);
