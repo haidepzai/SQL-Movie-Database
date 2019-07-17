@@ -15,6 +15,8 @@ SELECT m.title, sum(g.movie_theater) AS Sum_Of_Grosses FROM movies m, movie_gros
 --SELECT number of genres for each movie --
 SELECT m.title, COUNT(*) AS Number_of_genres FROM movies m, genre g, mov_gen mg WHERE m.movie_id = mg.mg_movie_id AND mg.mg_genre_id = g.genre_id GROUP BY m.title ORDER BY Number_of_genres DESC;
 
+-- SELECT all movie titles with their release date (even if it's NULL) + corresponding data from "movie_grosses" --
+SELECT m.title, m.release_date, mg.grossDate, mg.movie_theater FROM movies m LEFT OUTER JOIN movie_grosses mg ON m.movie_id = mg.g_movie_id;
 
 --UPDATEs --
 
