@@ -1,10 +1,7 @@
-----
---WHEN STARTED FIRST, YOU CAN NOT DROP THE TABLES!!! SO PLEASE SKIP THE DROP'S!
---OTHERWISE, IF YOU START THE WHOLE SCRIPT, PRESS "Ignore all".
---
---DROP all the constraints for a fully restartable script.--------------------------------------------------------------
---
---DROP all FOREIGN KEYS--
+---Movie-database---
+
+--DROP CONSTRAINTS--
+
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_fk2;
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_fk1;
 ALTER TABLE movieRole DROP CONSTRAINT movieRole_fk2;
@@ -14,11 +11,9 @@ ALTER TABLE movies DROP CONSTRAINT movies_fk2 ;
 ALTER TABLE movies DROP CONSTRAINT movies_fk1 ;
 ALTER TABLE prodCompany DROP CONSTRAINT prodCompany_fk1 ;
 
---DROP all UNIQUE CONSTARINTs
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_unique;
 ALTER TABLE movieRole DROP CONSTRAINT movieRole_unique;
 
---DROP all PRIMARY KEYS--
 ALTER TABLE mov_gen DROP CONSTRAINT mov_gen_pk;
 ALTER TABLE movieRole DROP CONSTRAINT movieRole_pk;
 ALTER TABLE movie_grosses DROP CONSTRAINT  movie_gross_pk ;
@@ -29,8 +24,9 @@ ALTER TABLE actor DROP CONSTRAINT actor_pk ;
 ALTER TABLE genre DROP CONSTRAINT genre_pk ;
 ALTER TABLE address DROP CONSTRAINT address_pk ;
 
---DROP all tables-------------------------------------------------------------------------------------------------------
---After dropping the constrains we can drop the TABLES in the right order, in terms of their dependencies.--
+
+-- DROP TABLES --
+
 DROP TABLE mov_gen;
 DROP TABLE movieRole;
 DROP TABLE movie_grosses;
@@ -41,7 +37,8 @@ DROP TABLE actor;
 DROP TABLE genre;
 DROP TABLE address;
 
---CREATE all TABLES needed, in the right order in terms of their dependencies-------------------------------------------
+
+-- CREATE TABLES --
 
 CREATE TABLE address
 (
@@ -115,8 +112,8 @@ CREATE TABLE mov_gen
 );
 
 
---ADD the CONSTRAINS to the tables which are needed for their dependencies----------------------------------------------
---ADD PRIMARY KEY CONSTRAINTS
+-- ADD CONSTRAINTS --
+
 ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY (address_id);
 ALTER TABLE genre ADD CONSTRAINT genre_pk PRIMARY KEY (genre_id);
 ALTER TABLE actor ADD CONSTRAINT actor_pk PRIMARY KEY (actor_socSecNum);
@@ -127,11 +124,9 @@ ALTER TABLE movie_grosses ADD CONSTRAINT  movie_gross_pk PRIMARY KEY (grosses_id
 ALTER TABLE movieRole ADD CONSTRAINT movieRole_pk PRIMARY KEY (role_id);
 ALTER TABLE mov_gen ADD CONSTRAINT mov_gen_pk PRIMARY KEY (mov_gen_id);
 
---ADD UNIQUE CONSTRAINTS
 ALTER TABLE mov_gen ADD CONSTRAINT mov_gen_unique UNIQUE (mg_movie_id, mg_genre_id);
 ALTER TABLE movieRole ADD CONSTRAINT movieRole_unique UNIQUE (mR_actor_id, mR_movie_id);
 
---ADD FOREIGN KEY CONSTRAINTS
 ALTER TABLE prodCompany ADD CONSTRAINT prodCompany_fk1 FOREIGN KEY (p_address_id) REFERENCES address (address_id);
 ALTER TABLE movies ADD CONSTRAINT movies_fk1 FOREIGN KEY (m_comp_id) REFERENCES  prodCompany (comp_id);
 ALTER TABLE movies ADD CONSTRAINT movies_fk2 FOREIGN KEY (m_dir_id) REFERENCES   director (dir_socSecNum);
@@ -142,9 +137,7 @@ ALTER TABLE mov_gen ADD CONSTRAINT mov_gen_fk1 FOREIGN KEY (mg_movie_id) REFEREN
 ALTER TABLE mov_gen ADD CONSTRAINT mov_gen_fk2 FOREIGN KEY (mg_genre_id) REFERENCES genre (genre_id);
 
 
---INSERTS for all the tables in the right order (in terms of their dependencies) ---------------------------------------
-
--- Address inserts
+-- INSERTs --
 
 INSERT INTO address (address_id, postCode, street, city, country) VALUES (1,13629,'Langestraße 24','Berlin','Germany');
 INSERT INTO address (address_id, postCode, street, city, country) VALUES (2,91522,'New York Street 56','New York','USA');
@@ -152,8 +145,6 @@ INSERT INTO address (address_id, postCode, street, city, country) VALUES (3,9018
 INSERT INTO address (address_id, postCode, street, city, country) VALUES (4,92364,'Old Town Road 42','Dublin','Ireland');
 
 
--- Genre inserts
---'genre_id' will be incremented by the following trigger
 DROP SEQUENCE genre_incrementId;
 CREATE SEQUENCE genre_incrementId
     MINVALUE 0
@@ -179,15 +170,11 @@ INSERT INTO genre (genre_id, genre_name) VALUES (0,'Horror');
 INSERT INTO genre (genre_id, genre_name) VALUES (0,'Western');
 
 
--- Actor insert
-
 INSERT INTO actor (actor_socSecNum, actor_name, actor_birthday) VALUES ('65 051195 S 003', 'Debastian Subiel', to_date('05.11.1995', 'DD.MM.YYYY'));
 INSERT INTO actor (actor_socSecNum, actor_name, actor_birthday) VALUES ('18 200492 L 402', 'Heon Leinrich', to_date('20.04.1992', 'DD.MM.YYYY'));
 INSERT INTO actor (actor_socSecNum, actor_name, actor_birthday) VALUES ('33 021070 H 753', 'Marta Higgins', to_date('02.10.1970', 'DD.MM.YYYY'));
 INSERT INTO actor (actor_socSecNum, actor_name, actor_birthday) VALUES ('20 060659 J 697', 'Isabelle Freljord', to_date('06.06.1959', 'DD.MM.YYYY'));
 
-
--- Director inserts
 
 INSERT INTO director (dir_socSecNum, dir_name, dir_birthday) VALUES ('25 240660 M 367', 'Steven Spielberg', to_date('24.06.1960', 'DD.MM.YYYY'));
 INSERT INTO director (dir_socSecNum, dir_name, dir_birthday) VALUES ('10 120387 F 477', 'Tom Fischer', to_date('12.03.1987', 'DD.MM.YYYY'));
@@ -195,15 +182,11 @@ INSERT INTO director (dir_socSecNum, dir_name, dir_birthday) VALUES ('15 010779 
 INSERT INTO director (dir_socSecNum, dir_name, dir_birthday) VALUES ('24 171219 H 127', 'Vai Hu', to_date('24.12.1993', 'DD.MM.YYYY'));
 
 
--- ProdCompany inserts
-
 INSERT INTO prodCompany (comp_id, comp_name, p_address_id) VALUES (1, 'The Dalt Wisney Company', 2);
 INSERT INTO prodCompany (comp_id, comp_name, p_address_id) VALUES (2, 'Warner Sis.', 4);
 INSERT INTO prodCompany (comp_id, comp_name, p_address_id) VALUES (3, 'Parodont Pictures', 3);
 INSERT INTO prodCompany (comp_id, comp_name, p_address_id) VALUES (4, '21st Century Fox', 1);
 
-
--- Movies inserts
 
 INSERT INTO movies (movie_id, title, m_comp_id, m_dir_id, plot_outline, release_date)
 VALUES (1,'Bames Jond, 700 Silver Ear',1,'25 240660 M 367','The Queen was threatened and Jond has to save her in a great thrilling adventure! ',TO_DATE('12.05.1987','DD.MM.YYYY'));
@@ -217,8 +200,6 @@ INSERT INTO movies (movie_id, title, m_comp_id, m_dir_id, plot_outline, release_
 VALUES (5,'The One and Only Movie',1,'15 010779 J 367',NULL,NULL);
 
 
--- MovieGrosses inserts
--- Trigger that checks whether a movie that has not been published yet, but has been previously added to the database, has been assigned a positive "grosses-value"
 CREATE OR REPLACE TRIGGER prevent_future_grosses
     BEFORE INSERT OR UPDATE ON movie_grosses
     REFERENCING OLD AS OLD NEW AS NEW
@@ -236,7 +217,6 @@ BEGIN
     END IF;
 END;
 
---'grosses_id' will be incremented by the following trigger
 DROP SEQUENCE grosses_incrementId;
 CREATE SEQUENCE grosses_incrementId
     MINVALUE 0
@@ -261,8 +241,6 @@ INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VAL
 (0, 1, TO_DATE('15.05.1987','DD.MM.YYYY'),30134687.00);
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 1, TO_DATE('16.05.1987','DD.MM.YYYY'),29637540.00);
-
-
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 2, TO_DATE('23.08.2013','DD.MM.YYYY'),1046978.00);
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
@@ -273,8 +251,6 @@ INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VAL
 (0, 2, TO_DATE('26.08.2013','DD.MM.YYYY'),4401349.00);
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 2, TO_DATE('27.08.2013','DD.MM.YYYY'),5000134.00);
-
-
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 3, TO_DATE('08.04.2015','DD.MM.YYYY'),6064371.00);
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
@@ -286,8 +262,7 @@ INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VAL
 INSERT INTO movie_grosses (grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 3, TO_DATE('12.04.2015','DD.MM.YYYY'),9613664.00);
 
--- movieRole insert
---'role_id' will be incremented by the following trigger
+
 DROP SEQUENCE movieRole_incrementId;
 CREATE SEQUENCE movieRole_incrementId
     MINVALUE 0
@@ -312,9 +287,6 @@ INSERT INTO movieRole (role_id, role_name, mR_actor_id, mR_movie_id) VALUES (0, 
 INSERT INTO movieRole (role_id, role_name, mR_actor_id, mR_movie_id) VALUES (0, 'Der Echte', '18 200492 L 402', 5);
 
 
---mov_gen inserts
-
---'mov_gen_id' will be incremented by the following trigger
 DROP SEQUENCE mov_gen_incrementId;
 CREATE SEQUENCE mov_gen_incrementId
     MINVALUE 0
@@ -342,44 +314,55 @@ INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 5, 4);
 
 COMMIT;
 
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
 
---SELECT commands ------------------------------------------------------------------------------------------------------
---SELECT everything in movies--
+-- SELECTs --
+
+-- SELECT everything from "movies" --
 SELECT * FROM movies;
---SELECT movie title and the referenced roles + actor--
+
+--SELECT movie title and the referenced roles + actors --
 SELECT m.title, a.actor_name, mR.role_name FROM movies m, actor a, movieRole mR WHERE m.movie_id = mR.mR_movie_id AND mR.mR_actor_id = a.actor_socSecNum;
---SELECT movies which were released before a specific date--
+
+--SELECT movies which were released before a specific date --
 SELECT m.title, release_date FROM movies m WHERE release_date < to_date('23.03.2015', 'DD.MM.YYYY');
 
---Use sum, count functions in addition with GROUP BY and ordered descending--
---SELECT movies with the sum of the total income--
+--SELECT movies + sum of their specific total income --
 SELECT m.title, sum(g.movie_theater) AS Sum_Of_Grosses FROM movies m, movie_grosses g WHERE m.movie_id = g.g_movie_id GROUP BY m.title ORDER BY Sum_Of_Grosses DESC;
---SELECT number of genres for each movie
+
+--SELECT number of genres for each movie --
 SELECT m.title, COUNT(*) AS Number_of_genres FROM movies m, genre g, mov_gen mg WHERE m.movie_id = mg.mg_movie_id AND mg.mg_genre_id = g.genre_id GROUP BY m.title ORDER BY Number_of_genres DESC;
 
 
+--UPDATEs --
 
---UPDATE commands-------------------------------------------------------------------------------------------------------
---UPDATE the plot outline of a specific movie--
+--UPDATE the plot outline of a specific movie --
 UPDATE movies SET plot_outline = 'A bunch of scary stories told by your favourite character' WHERE movie_id = 4;
---Change(UPDATE) the genre names of two specific genres--
+
+-- UPDATE genre names of two specific genres --
 UPDATE genre SET genre_name = 'Adventure' WHERE genre_id = 4;
 UPDATE genre SET genre_name = 'Thriller' WHERE genre_id = 3;
---UPDATE the release date of a specific movie--
+
+-- UPDATE release date of a specific movie --
 UPDATE movies SET release_date = to_date('23.12.2018', 'DD.MM.YYYY') WHERE movie_id = 1;
---UPDATE movie_grosses by adding grosses to all entries of a specific movie
+
+--UPDATE movie_grosses by adding grosses to all entries of a specific movie --
 UPDATE movie_grosses SET movie_theater =+ 10000.00 WHERE g_movie_id = 1;
+
 
 COMMIT;
 
---Trigger-tests---------------------------------------------------------------------------------------------------------
---IncrementId-TRIGGER tests--
+
+-- TRIGGER-tests --
+
+-- IncrementId-TRIGGER --
+
 SELECT * FROM movie_grosses WHERE grosses_id = 3;
 SELECT * FROM movie_grosses WHERE grosses_id = 4;
 SELECT * FROM movie_grosses WHERE grosses_id = 5;
---Test of Trigger: "prevent_future_grosses"
+
+
+-- TRIGGER: "prevent_future_grosses" --
+
 INSERT INTO movie_grosses(grosses_id, g_movie_id, grossDate, movie_theater) VALUES
 (0, 5, SYSDATE, 66754.00);
 
