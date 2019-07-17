@@ -1,4 +1,3 @@
-
 -- SELECTs --
 
 -- SELECT everything from "movies" --
