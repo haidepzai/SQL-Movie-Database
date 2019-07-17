@@ -332,9 +332,9 @@ END;
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 1, 3);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 1, 2);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 1, 5);
-INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 3, 7);
+INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 2, 7);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 3, 6);
-INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 4, 3);
+INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 3, 3);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 4, 8);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 4, 1);
 INSERT INTO mov_gen (mov_gen_id, mg_movie_id, mg_genre_id) VALUES (0, 5, 4);
@@ -359,8 +359,7 @@ SELECT m.title, sum(g.movie_theater) AS Sum_Of_Grosses FROM movies m, movie_gros
 --SELECT number of genres for each movie
 SELECT m.title, COUNT(*) AS Number_of_genres FROM movies m, genre g, mov_gen mg WHERE m.movie_id = mg.mg_movie_id AND mg.mg_genre_id = g.genre_id GROUP BY m.title ORDER BY Number_of_genres DESC;
 
---LEFT OUTER JOIN to check whether a movie has no assigned genre
-SELECT * FROM movies m LEFT OUTER JOIN mov_gen mg ON m.movie_id = mg.mg_movie_id WHERE mov_gen_id IS NULL;
+
 
 --UPDATE commands-------------------------------------------------------------------------------------------------------
 --UPDATE the plot outline of a specific movie--
