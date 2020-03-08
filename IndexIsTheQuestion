@@ -1,5 +1,0 @@
-Benötigen wir einen Index?
-Nein, da wir in jeder Tabelle durch die Verwendung eines Primärschlüssels eine implizite Indexierung der Daten vorgenommen haben.
-Ein expliziter Index würde sich jedoch beispielsweise in der Tabelle movie_grosses eignen da diese durch fortlaufendes Eintragen der Umsätze sehr schnell wachsen würde und hier 
-außerdem wiederholte bestimmte Lesevorgänge vorkommen könnten bei denen sich ein Index ebenfalls lohnt. Durch die Suche anhand eines Binärbaumes mit dem der Index arbeitet, 
-würde dadurch der Lesezugriff um einiges schneller ablaufen als das lineare Suchen eines Eintrages.
